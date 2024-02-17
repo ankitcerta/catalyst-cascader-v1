@@ -1,61 +1,8 @@
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-} */
-
-:root {
-  --colors-neutral-500: #999999;
-  --colors-red-600: #ff0000;
-  --colors-red-100: #ffcccc;
-  --colors-red-500: #ff3333;
-  --colors-red-300: #ff9999;
-  --colors-neutral-400: #cccccc;
-  --colors-neutral-700: #666666;
-  --colors-brand-400: #3366ff;
-  --colors-brand-200: #99ccff;
-  --colors-brand-400: #3366ff;
-  --colors-neutral-800: #333333;
-  --catalyst-zindex-cascader: 100;
-  --colors-neutral-100: #f2f2f2;
-  --colors-neutral-800: #333333;
-  --catalyst-zindex-cascader: 9999;
-}
-
 .catalyst-cascader {
   border: 0.0625rem solid;
   height: 2.25rem;
   display: flex;
   align-items: center;
-  font-family: sans-serif;
   border-radius: 0.25rem;
   border: 0.0625rem solid var(--colors-neutral-500);
   position: relative;
@@ -199,13 +146,12 @@ body {
 
 .catalyst-cascader-menus {
   list-style-type: none;
-  display: flex;
 }
 
 .catalyst-cascader-menu {
   margin: 0;
   background: var(--colors-neutral-100);
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 22, 78, 0.15);
   border-radius: 0.25rem;
   padding: 0.375rem;
   display: inline-block;
@@ -250,8 +196,8 @@ body {
   .catalyst-cascader-menu-item:not(.catalyst-cascader-menu-item-disabled):hover,
 .catalyst-cascader-menus:not(.catalyst-cascader-menu-empty)
   .catalyst-cascader-menu-item-active {
-  background: #ff6f00;
-  color: #ffffff;
+  background: var(--colors-brand-400);
+  color: var(--colors-neutral-100);
 }
 
 .catalyst-cascader-menus:not(.catalyst-cascader-menu-empty)
@@ -260,12 +206,12 @@ body {
 .catalyst-cascader-menus:not(.catalyst-cascader-menu-empty)
   .catalyst-cascader-menu-item-active
   span {
-  color: #ffffff !important;
+  color: var(--colors-neutral-100) !important;
 }
 
 .catalyst-cascader-menus:not(.catalyst-cascader-menu-empty)
   .catalyst-cascader-menu-item-disabled {
-  color: #999999;
+  color: var(--colors-neutral-600);
   cursor: not-allowed;
 }
 
@@ -282,7 +228,7 @@ body {
 .catalyst-cascader-arrow,
 .catalyst-cascader-clear {
   display: flex;
-  color: #555555;
+  color: var(--colors-neutral-700);
   position: absolute;
   right: 0;
   cursor: pointer;
@@ -303,18 +249,18 @@ body {
 }
 
 .catalyst-cascader-success {
-  background-color: #c8e6c9;
-  border: 0.0625rem solid #2e7d32;
+  background-color: var(--colors-green-100);
+  border: 0.0625rem solid var(--colors-green-600);
 }
 
 .catalyst-cascader-success:hover {
-  background-color: #c8e6c9;
-  border: 0.0625rem solid #2e7d32 !important;
+  background-color: var(--colors-green-100);
+  border: 0.0625rem solid var(--colors-green-600) !important;
 }
 
 .catalyst-cascader-success:focus-within {
-  box-shadow: 0 0 0 0.1875rem #81c784 !important;
-  border: 0.0625rem solid #2e7d32 !important;
+  box-shadow: 0 0 0 0.1875rem var(--colors-green-300) !important;
+  border: 0.0625rem solid var(--colors-green-600) !important;
 }
 
 /*=============================================
@@ -327,47 +273,47 @@ body {
   display: flex;
   align-items: center;
   border-radius: 0.25rem;
-  border: 0.0625rem solid #999999;
+  border: 0.0625rem solid var(--colors-neutral-500);
   position: relative;
 }
 
 .catalyst-multi-cascader[aria-invalid="true"]:not(
     .catalyst-multi-cascader-disabled
   ) {
-  border: 0.0625rem solid #d32f2f;
-  background-color: #ffcdd2;
+  border: 0.0625rem solid var(--colors-red-600);
+  background-color: var(--colors-red-100);
 }
 
 .catalyst-multi-cascader[aria-invalid="true"]:not(
     .catalyst-multi-cascader-disabled
   ):hover {
-  border: 0.0625rem solid #c62828;
+  border: 0.0625rem solid var(--colors-red-500);
 }
 
 .catalyst-multi-cascader[aria-invalid="true"]:not(
     .catalyst-multi-cascader-disabled
   ):focus-within {
-  box-shadow: 0 0 0 0.1875rem #ef9a9a;
-  border: 0.0625rem solid #c62828;
+  box-shadow: 0 0 0 0.1875rem var(--colors-red-300);
+  border: 0.0625rem solid var(--colors-red-500);
 }
 
 .catalyst-multi-cascader-disabled {
-  background-color: #b3b3b3;
-  border: 0.0625rem solid #999999;
+  background-color: var(--colors-neutral-400);
+  border: 0.0625rem solid var(--colors-neutral-500);
   cursor: not-allowed;
 }
 
 .catalyst-multi-cascader:not(.catalyst-multi-cascader-disabled):not(
     [aria-invalid="true"]
   ):focus-within {
-  border: 0.0625rem solid #ff6f00;
-  box-shadow: 0 0 0 0.1875rem #ffcc80;
+  border: 0.0625rem solid var(--colors-brand-400);
+  box-shadow: 0 0 0 0.1875rem var(--colors-brand-200);
 }
 
 .catalyst-multi-cascader:not(.catalyst-multi-cascader-disabled):not(
     [aria-invalid="true"]
   ):hover {
-  border: 0.0625rem solid #ff6f00;
+  border: 0.0625rem solid var(--colors-brand-400);
 }
 
 /*=============================================
@@ -420,7 +366,7 @@ body {
   font-weight: 400;
   font-size: 0.875rem;
   line-height: 1.25rem;
-  color: #555555;
+  color: var(--colors-neutral-700);
   vertical-align: middle;
   display: flex;
   align-items: center;
@@ -465,8 +411,8 @@ body {
   column-gap: 0.5rem;
   overflow: hidden;
   position: relative;
-  background-color: #ff6f00;
-  color: #333333;
+  background-color: var(--colors-brand-100);
+  color: var(--colors-neutral-800);
   padding: 0.25rem 0.5rem;
   border-radius: 0.125rem;
   line-height: 1rem;
@@ -482,7 +428,7 @@ body {
 
 .catalyst-multi-cascader[aria-invalid="true"]
   .catalyst-multi-cascader-selection-item {
-  color: #d32f2f;
+  color: var(--colors-red-600);
 }
 
 /*=====  End of Selected options  ======*/
@@ -502,7 +448,7 @@ body {
 
 .catalyst-multi-cascader-menu {
   margin: 0;
-  background: #f5f5f5;
+  background: var(--colors-neutral-100);
   box-shadow: 0 0.5rem 1.5rem rgba(0, 22, 78, 0.15);
   border-radius: 0.25rem;
   padding: 0.375rem;
@@ -529,7 +475,7 @@ body {
   font-weight: 500;
   font-size: 0.75rem;
   line-height: 1rem;
-  color: #333333;
+  color: var(--colors-neutral-800);
 }
 
 .catalyst-multi-cascader-menu-item:not(:last-child) {
@@ -545,20 +491,20 @@ body {
 
 .catalyst-multi-cascader-menus:not(.catalyst-multi-cascader-menu-empty)
   .catalyst-multi-cascader-menu-item-active {
-  background-color: #ff6f00;
+  background-color: var(--colors-brand-100);
 }
 
 .catalyst-multi-cascader-menus:not(.catalyst-multi-cascader-menu-empty)
   .catalyst-multi-cascader-menu-item:not(
     .catalyst-multi-cascader-menu-item-active
   ):not(.catalyst-multi-cascader-menu-item-disabled):hover {
-  background-color: #ff6f00;
-  color: #ffffff;
+  background-color: var(--colors-brand-400);
+  color: var(--colors-neutral-100);
 }
 
 .catalyst-multi-cascader-menus:not(.catalyst-multi-cascader-menu-empty)
   .catalyst-multi-cascader-menu-item-disabled {
-  color: #999999;
+  color: var(--colors-neutral-600);
   cursor: not-allowed;
 }
 
@@ -578,7 +524,7 @@ body {
 .catalyst-multi-cascader-arrow,
 .catalyst-multi-cascader-clear {
   display: flex;
-  color: #555555;
+  color: var(--colors-neutral-700);
   position: absolute;
   right: 0;
   cursor: pointer;
@@ -598,18 +544,18 @@ body {
 }
 
 .catalyst-multi-cascader-success {
-  background-color: #c8e6c9;
-  border: 0.0625rem solid #2e7d32;
+  background-color: var(--colors-green-100);
+  border: 0.0625rem solid var(--colors-green-600);
 }
 
 .catalyst-multi-cascader-success:hover {
-  background-color: #c8e6c9;
-  border: 0.0625rem solid #2e7d32 !important;
+  background-color: var(--colors-green-100);
+  border: 0.0625rem solid var(--colors-green-600) !important;
 }
 
 .catalyst-multi-cascader-success:focus-within {
-  box-shadow: 0 0 0 0.1875rem #81c784 !important;
-  border: 0.0625rem solid #2e7d32 !important;
+  box-shadow: 0 0 0 0.1875rem var(--colors-green-300) !important;
+  border: 0.0625rem solid var(--colors-green-600) !important;
 }
 
 .catalyst-multi-cascader .catalyst-cascader-menu-item-content {
@@ -629,34 +575,34 @@ rc-cascader do not allow to pass custom Checkbox component, so we have to overri
   margin: 0.188rem;
   position: relative;
   border-radius: 0.125rem;
-  border: 0.0625rem solid #555555;
+  border: 0.0625rem solid var(--colors-neutral-700);
   appearance: none;
   height: 0.75rem !important;
   width: 0.75rem !important;
-  background-color: #f5f5f5;
-  outline: 0.063rem solid #f5f5f5;
+  background-color: var(--colors-neutral-100);
+  outline: 0.063rem solid var(--colors-neutral-100);
   cursor: pointer;
   flex-shrink: 0;
 }
 
 .catalyst-multi-cascader-checkbox-checked,
 .catalyst-multi-cascader-checkbox-indeterminate {
-  background-color: #ff6f00;
-  border: 0.0625rem solid #ff6f00;
+  background-color: var(--colors-brand-400);
+  border: 0.0625rem solid var(--colors-brand-400);
 }
 
 .catalyst-multi-cascader-checkbox-disabled {
-  border: 0.0625rem solid #999999;
+  border: 0.0625rem solid var(--colors-neutral-600);
 }
 
 .catalyst-multi-cascader-checkbox-disabled {
-  border: 0.0625rem solid #999999;
+  border: 0.0625rem solid var(--colors-neutral-600);
 }
 
 .catalyst-multi-cascader-checkbox-checked.catalyst-multi-cascader-checkbox-disabled,
 .catalyst-multi-cascader-checkbox-indeterminate.catalyst-multi-cascader-checkbox-disabled {
-  border: 0.0625rem solid #999999;
-  background-color: #999999;
+  border: 0.0625rem solid var(--colors-neutral-600);
+  background-color: var(--colors-neutral-600);
 }
 
 .catalyst-multi-cascader-checkbox-checked::after {
@@ -666,7 +612,7 @@ rc-cascader do not allow to pass custom Checkbox component, so we have to overri
   top: 0.0313rem;
   width: 0.1625rem;
   height: 0.375rem;
-  border: solid #f5f5f5;
+  border: solid var(--colors-neutral-100);
   border-width: 0 0.0875rem 0.0875rem 0;
   transform: rotate(40deg);
   box-sizing: content-box !important;
@@ -680,7 +626,7 @@ rc-cascader do not allow to pass custom Checkbox component, so we have to overri
   top: 0.2625rem;
   width: 0.375rem;
   height: 0.0938rem;
-  background-color: #f5f5f5;
+  background-color: var(--colors-neutral-100);
   border-radius: 0.125rem;
   transition: all 0.3s ease;
 }

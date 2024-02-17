@@ -1,0 +1,45 @@
+import * as React from "react";
+import type {
+  CascaderProps,
+  InternalFieldNames,
+  DefaultOptionType,
+  SingleValueType,
+} from "./Cascader";
+
+export interface CascaderContextProps {
+  options: CascaderProps["options"];
+  fieldNames: InternalFieldNames;
+  values: SingleValueType[];
+  halfValues: SingleValueType[];
+  changeOnSelect?: boolean;
+  onSelect: (valuePath: SingleValueType) => void;
+  checkable?: boolean | React.ReactNode;
+  searchOptions: DefaultOptionType[];
+  dropdownPrefixCls?: string;
+  loadData?: (selectOptions: DefaultOptionType[]) => void;
+  expandTrigger?: "hover" | "click";
+  expandIcon?: React.ReactNode;
+  loadingIcon?: React.ReactNode;
+  dropdownMenuColumnStyle?: React.CSSProperties;
+  grouping?: boolean;
+}
+
+const defaultCascaderContextValue: CascaderContextProps = {
+  fieldNames: {
+    key: "key",
+    label: "label",
+    value: "value",
+    children: "children",
+  },
+  options: [],
+  values: [],
+  halfValues: [],
+  onSelect: () => {},
+  searchOptions: [],
+};
+
+const CascaderContext = React.createContext<CascaderContextProps>(
+  defaultCascaderContextValue
+);
+
+export default CascaderContext;
