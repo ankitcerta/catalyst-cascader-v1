@@ -13,7 +13,7 @@ const useDisplayValues = (
   options: DefaultOptionType[],
   fieldNames: InternalFieldNames,
   multiple: boolean,
-  displayRender: CascaderProps["displayRender"]
+  displayRender?: CascaderProps["displayRender"]
 ) => {
   return React.useMemo(() => {
     const mergedDisplayRender =
@@ -55,7 +55,7 @@ const useDisplayValues = (
         valueOptions.map(({ option }) => option)
       );
 
-      const value = toPathKey(valueCells);
+      const value = toPathKey?.(valueCells);
 
       return {
         label,

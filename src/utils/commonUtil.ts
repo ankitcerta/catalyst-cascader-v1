@@ -15,7 +15,7 @@ export const SHOW_CHILD = "SHOW_CHILD";
  * Will convert value to string, and join with `VALUE_SPLIT`
  */
 export function toPathKey(value: SingleValueType) {
-  return value.join(VALUE_SPLIT);
+  return value?.join?.(VALUE_SPLIT);
 }
 
 /**
@@ -67,9 +67,9 @@ export function getFullPathKeys(
   options: DefaultOptionType[],
   fieldNames: FieldNames
 ) {
-  return options.map((item) =>
-    item[SEARCH_MARK]?.map((opt: any) => opt[fieldNames.value ?? ""])
-  );
+  return options.map((item) => {
+    return item[SEARCH_MARK]?.map((opt: any) => opt[fieldNames.value ?? ""]);
+  });
 }
 
 function isMultipleValue(value: ValueType): value is SingleValueType[] {

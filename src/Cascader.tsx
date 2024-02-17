@@ -182,6 +182,7 @@ interface BaseCascaderProps<
   showSearch?: boolean | ShowSearchType<OptionType>;
   searchValue?: string;
   onSearch?: (value: string) => void;
+  showLocalSearch?: boolean;
 
   // Trigger
   expandTrigger?: "hover" | "click";
@@ -289,6 +290,7 @@ export const Cascader = React.forwardRef<CascaderRef, InternalCascaderProps>(
       searchValue,
       onSearch,
       showSearch,
+      showLocalSearch,
 
       // Trigger
       expandTrigger,
@@ -510,9 +512,11 @@ export const Cascader = React.forwardRef<CascaderRef, InternalCascaderProps>(
         loadingIcon,
         dropdownMenuColumnStyle,
         grouping,
+        showLocalSearch,
       }),
       [
         mergedOptions,
+        showLocalSearch,
         mergedFieldNames,
         checkedValues,
         halfCheckedValues,

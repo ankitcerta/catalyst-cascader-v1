@@ -22,6 +22,7 @@ export interface CascaderContextProps {
   loadingIcon?: React.ReactNode;
   dropdownMenuColumnStyle?: React.CSSProperties;
   grouping?: boolean;
+  showLocalSearch?: boolean;
 }
 
 const defaultCascaderContextValue: CascaderContextProps = {

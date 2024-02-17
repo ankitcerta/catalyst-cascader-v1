@@ -24,9 +24,11 @@ const useKeyboard = (
     searchValue: string;
     toggleOpen: (open?: boolean) => void;
     open: boolean;
+    showLocalSearch: boolean;
   }
 ) => {
-  const { direction, searchValue, toggleOpen, open } = contextProps;
+  const { direction, searchValue, toggleOpen, open, showLocalSearch } =
+    contextProps;
   const rtl = direction === "rtl";
 
   const [
@@ -44,6 +46,7 @@ const useKeyboard = (
     const len = activeValueCells.length;
 
     const pathKeys = getFullPathKeys(options, fieldNames);
+    console.log("PATHKEYS", pathKeys);
 
     // Fill validate active value cells and index
     for (let i = 0; i < len && currentOptions; i += 1) {
@@ -180,10 +183,10 @@ const useKeyboard = (
         }
 
         case KeyCode.BACKSPACE: {
-          if (!searchValue) {
-            prevColumn();
+          if (searchValue || showLocalSearch) {
+            break;
           }
-          break;
+          prevColumn();
         }
 
         // >>> Select

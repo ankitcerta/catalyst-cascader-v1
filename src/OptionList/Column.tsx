@@ -5,6 +5,7 @@ import CascaderContext from "../context";
 import { SEARCH_MARK } from "../hooks/useSearchOptions";
 import { isLeaf, toPathKey } from "../utils/commonUtil";
 import Checkbox from "./Checkbox";
+import { useLocalFilter } from "@/hooks/useLocalFilter";
 
 export const FIX_LABEL = "__cascader_fix_label__";
 
@@ -24,6 +25,9 @@ export interface ColumnProps {
   loadingKeys: React.Key[];
   isSelectable: (option: DefaultOptionType) => boolean;
   searchValue?: string;
+  activeValueCells?: React.Key[];
+  emptyList?: DefaultOptionType[];
+  setActiveValueCells?: (activeValueCells: React.Key[]) => void;
 }
 
 export default function Column({
@@ -40,25 +44,26 @@ export default function Column({
   loadingKeys,
   isSelectable,
   searchValue,
+  activeValueCells,
+  setActiveValueCells,
+  emptyList,
 }: ColumnProps) {
+  const menuWithSearchCls = `${prefixCls}-menu-search`;
+  const menuWithSearchInputCls = `${prefixCls}-menu-search-input`;
   const menuPrefixCls = `${prefixCls}-menu`;
   const menuItemPrefixCls = `${prefixCls}-menu-item`;
 
-  const props = {
-    prefixCls,
-    multiple,
+  const {
+    searchString: localSearchValue,
+    setSearchString: setLocalSearchValue,
+    filteredOptions,
+  } = useLocalFilter({
     options,
+    emptyList,
+    activeValueCells,
     activeValue,
-    prevValuePath,
-    onToggleOpen,
-    onSelect,
-    onActive,
-    checkedSet,
-    halfCheckedSet,
-    loadingKeys,
-    isSelectable,
-    searchValue,
-  };
+    setActiveValueCells,
+  });
 
   const {
     fieldNames,
@@ -67,7 +72,7 @@ export default function Column({
     expandIcon,
     loadingIcon,
     dropdownMenuColumnStyle,
-    grouping,
+    showLocalSearch,
   } = React.useContext(CascaderContext);
 
   const hoverOpen = expandTrigger === "hover";
@@ -75,7 +80,7 @@ export default function Column({
   // ============================ Option ============================
   const optionInfoList = React.useMemo(
     () =>
-      options.map((option) => {
+      filteredOptions.map((option) => {
         const { disabled, disableCheckbox } = option;
 
         const searchOptions = option[SEARCH_MARK];
@@ -115,7 +120,7 @@ export default function Column({
         };
       }),
     [
-      options,
+      filteredOptions,
       checkedSet,
       fieldNames,
       halfCheckedSet,
@@ -128,26 +133,33 @@ export default function Column({
 
   // ============================ Render ============================
   return (
-    <div>
+    <div className={menuWithSearchCls}>
+      {showLocalSearch && (
+        <input
+          className={menuWithSearchInputCls}
+          value={localSearchValue}
+          onChange={(e) => {
+            setLocalSearchValue(e.target.value);
+            e.stopPropagation();
+          }}
+        />
+      )}
       <ul className={menuPrefixCls} role="menu">
         {optionInfoList.map(
-          (
-            {
-              disabled,
-              label,
-              value,
-              isLeaf: isMergedLeaf,
-              isLoading,
-              checked,
-              halfChecked,
-              option,
-              fullPath,
-              fullPathKey,
-              disableCheckbox,
-              isGroupLabel,
-            },
-            index
-          ) => {
+          ({
+            disabled,
+            label,
+            value,
+            isLeaf: isMergedLeaf,
+            isLoading,
+            checked,
+            halfChecked,
+            option,
+            fullPath,
+            fullPathKey,
+            disableCheckbox,
+            isGroupLabel,
+          }) => {
             // >>>>> Title
             let title: string;
             if (typeof option.title === "string") {
@@ -157,6 +169,12 @@ export default function Column({
             } else {
               title = "";
             }
+
+            const clearLocalSearchInput = () => {
+              if (showLocalSearch) {
+                setLocalSearchValue("");
+              }
+            };
 
             // >>>>> Open
             const triggerOpenPath = () => {
@@ -168,6 +186,7 @@ export default function Column({
                 nextValueCells.pop();
               }
               onActive(nextValueCells);
+              clearLocalSearchInput();
             };
 
             // >>>>> Selection
@@ -179,7 +198,11 @@ export default function Column({
 
             if (isGroupLabel) {
               return (
-                <div key={fullPathKey} role="rowheader" aria-disabled="true">
+                <div
+                  key={fullPathKey}
+                  role="rowheader"
+                  aria-disabled={disabled}
+                >
                   {title}
                 </div>
               );

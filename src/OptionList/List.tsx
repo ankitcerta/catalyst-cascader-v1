@@ -18,7 +18,7 @@ import CacheContent from "./CacheContent";
 import Column, { FIX_LABEL } from "./Column";
 import useActive from "./useActive";
 import useKeyboard from "./useKeyboard";
-import { group } from "console";
+import useDisplayValues from "@/hooks/useDisplayValues";
 
 export type RawOptionListProps = Pick<
   ReturnType<typeof useBaseProps>,
@@ -57,7 +57,7 @@ const RawOptionList = React.forwardRef<RefOptionListProps, RawOptionListProps>(
       dropdownPrefixCls,
       loadData,
       expandTrigger,
-      grouping,
+      showLocalSearch,
     } = React.useContext(CascaderContext);
 
     const mergedPrefixCls = dropdownPrefixCls || prefixCls;
@@ -214,7 +214,8 @@ const RawOptionList = React.forwardRef<RefOptionListProps, RawOptionListProps>(
         direction: direction!,
         searchValue,
         toggleOpen,
-        open: open!,
+        open: !!open,
+        showLocalSearch: !!showLocalSearch,
       }
     );
 
@@ -261,6 +262,13 @@ const RawOptionList = React.forwardRef<RefOptionListProps, RawOptionListProps>(
       ? [{ options: emptyList }]
       : optionColumns;
 
+    const displayValues = useDisplayValues(
+      [activeValueCells as SingleValueType],
+      mergedOptions!,
+      fieldNames,
+      multiple
+    );
+
     const columnNodes: React.ReactElement[] = mergedOptionColumns.map(
       (col, index) => {
         const prevValuePath = activeValueCells.slice(0, index);
@@ -271,6 +279,9 @@ const RawOptionList = React.forwardRef<RefOptionListProps, RawOptionListProps>(
             <Column
               key={index}
               {...columnProps}
+              activeValueCells={activeValueCells}
+              setActiveValueCells={setActiveValueCells}
+              emptyList={emptyList}
               searchValue={searchValue}
               prefixCls={mergedPrefixCls}
               options={col.options!}
@@ -282,7 +293,7 @@ const RawOptionList = React.forwardRef<RefOptionListProps, RawOptionListProps>(
       }
     );
 
-    const message = activeValueCells.join(" / ");
+    const message = displayValues[0]?.label;
 
     // >>>>> Render
     return (
@@ -296,7 +307,12 @@ const RawOptionList = React.forwardRef<RefOptionListProps, RawOptionListProps>(
         >
           {columnNodes}
         </div>
-        <div aria-live="polite">{message}</div>
+        <div
+          className={`${mergedPrefixCls}-menu-current-item`}
+          aria-live="polite"
+        >
+          {message}
+        </div>
       </CacheContent>
     );
   }
