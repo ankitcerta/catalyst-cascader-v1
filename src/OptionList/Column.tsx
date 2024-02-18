@@ -198,6 +198,7 @@ export default function Column({
               return (
                 <div
                   key={fullPathKey}
+                  className={classNames(`${menuItemPrefixCls}-group-header`)}
                   role="rowheader"
                   aria-disabled={disabled}
                 >

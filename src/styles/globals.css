@@ -248,6 +248,16 @@ body {
   color: var(--colors-neutral-800);
 }
 
+.catalyst-cascader-menu-item-group-header {
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: var(--colors-neutral-800);
+  padding: 0.5rem;
+  background-color: var(--colors-neutral-100);
+  border-radius: 0.25rem;
+  margin-bottom: 0.125rem;
+}
+
 .catalyst-cascader-menu-item:not(:last-child) {
   margin-bottom: 0.125rem;
 }

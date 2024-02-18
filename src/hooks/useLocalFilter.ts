@@ -50,7 +50,9 @@ export const useLocalFilter = <OptionType extends DefaultOptionType>({
     const lowerSearchValue = searchString.toLowerCase();
     const filteredOptions = options.filter((option) => {
       const label = option[FIX_LABEL] ?? option.label;
-      return label.toLowerCase().includes(lowerSearchValue);
+      return (
+        label.toLowerCase().includes(lowerSearchValue) && !option.groupLabel
+      );
     });
 
     const filteredOptionsContainsActiveValue = filteredOptions.some(
