@@ -46,7 +46,6 @@ const useKeyboard = (
     const len = activeValueCells.length;
 
     const pathKeys = getFullPathKeys(options, fieldNames);
-    console.log("PATHKEYS", pathKeys);
 
     // Fill validate active value cells and index
     for (let i = 0; i < len && currentOptions; i += 1) {

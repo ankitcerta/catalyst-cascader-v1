@@ -129,8 +129,6 @@ export default function Column({
     ]
   );
 
-  // console.log("____OPTION_INFO_LIST____", optionInfoList);
-
   // ============================ Render ============================
   return (
     <div className={menuWithSearchCls}>

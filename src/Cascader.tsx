@@ -550,10 +550,6 @@ export const Cascader = React.forwardRef<CascaderRef, InternalCascaderProps>(
             minWidth: "auto",
           };
 
-    console.log({
-      dropdownStyle,
-      customDropdownStyle,
-    });
     return (
       <CascaderContext.Provider value={cascaderContext}>
         <BaseSelect
