@@ -136,6 +136,7 @@ export default function Column({
         <input
           className={menuWithSearchInputCls}
           value={localSearchValue}
+          placeholder="Search..."
           onChange={(e) => {
             setLocalSearchValue(e.target.value);
             e.stopPropagation();

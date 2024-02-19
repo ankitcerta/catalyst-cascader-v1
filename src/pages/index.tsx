@@ -239,20 +239,20 @@ export default function Home() {
         options={addressOptions}
         grouping
         showLocalSearch
-        showSearch={
-          multiple
-            ? {
-                filter: (inputValue: string, path: any) => {
-                  return path.some(
-                    (option: any) =>
-                      option.label
-                        .toLowerCase()
-                        .indexOf(inputValue.toLowerCase()) > -1
-                  );
-                },
-              }
-            : true
-        }
+        // showSearch={
+        //   multiple
+        //     ? {
+        //         filter: (inputValue: string, path: any) => {
+        //           return path.some(
+        //             (option: any) =>
+        //               option.label
+        //                 .toLowerCase()
+        //                 .indexOf(inputValue.toLowerCase()) > -1
+        //           );
+        //         },
+        //       }
+        //     : true
+        // }
         onChange={onChange}
         prefixCls={prefixCls}
       />

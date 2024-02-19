@@ -322,11 +322,4 @@ if (process.env.NODE_ENV !== "production") {
   RawOptionList.displayName = "RawOptionList";
 }
 
-/**
- * 1. Basic casacder on sandbox
- * 2. Rc - cascader reference.
- * 3. Positioning - popper js
- * 4. Accessibility -> not able to hear the options
- */
-
 export default RawOptionList;
